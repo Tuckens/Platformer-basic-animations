@@ -1,3 +1,3 @@
-# Visual_studio_Game
+# Platformer
 
 Learning basics of physics and animation
