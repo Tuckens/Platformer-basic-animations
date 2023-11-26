@@ -3,7 +3,7 @@
 
 void Game::initWindow()
 {
-	this->window.create(sf::VideoMode(1080,720), "Game", sf::Style::Close | sf::Style::Titlebar);
+	this->window.create(sf::VideoMode(1600,900), "Game", sf::Style::Close || sf::Style::Titlebar);
 	this->window.setFramerateLimit(60);
 }
 

@@ -4,6 +4,8 @@
 void Player::initVariables()
 {
 	this->animState = IDLE;
+	this->movingX = false;
+	this->movingY = false;
 }
 
 void Player::initTexture()
@@ -40,6 +42,8 @@ void Player::initPhysics()
 	this->drag = 0.92f;
 	this->gravity = 4.f;
 	this->velocityMaxY = 5.f;
+	this->velocity.x = 0;
+	this->velocity.y = 0;
 
 }
 
@@ -132,28 +136,36 @@ void Player::updateMovement()
 	this->animState = IDLE;
 	
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A)) {
-		this->velocity.x = -2.f;
+		this->velocity.x = -6.f;
 		this->animState = MOVING_LEFT;
 		this->sprite.setScale(-3.f, 3.f);
 		this->sprite.setOrigin(this->sprite.getGlobalBounds().width / 5.f, 0.f);
-		this->resetAnimationTimer();
+		this->animationSwitch = true;
+		this->movingX = true;
 	}
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D)) {
-		this->velocity.x = 2.f;
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D)) {
+		this->velocity.x = 6.f;
 		this->animState = MOVING_RIGHT;
 		this->sprite.setScale(3.f, 3.f);
 		this->sprite.setOrigin( 0.f, 0.f);
-		this->resetAnimationTimer();
-		
+		this->animationSwitch = true;
+		this->movingX = true;
 	}
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W)) {
-		this->move(this->velocity.x, -2.f);
+		this->velocity.y = -8.f;
 		this->animState = JUMPING;
-		this->resetAnimationTimer();
+		this->animationSwitch = true;
+		this->movingY = true;
 	}
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S)) {
-		this->move(this->velocity.x, 2.f);
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S) && this->movingY) {
+		this->velocity.y = 8.f;
+		this->animationSwitch = true;
+		this->movingY = true;
+	}
+
+	if (this->velocity.y == 0.f) {
+		this->movingY = false;
 	}
 }
 

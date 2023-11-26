@@ -21,7 +21,9 @@ private:
 	float velocityMaxY;
 
 
-	bool moving;
+	bool movingX;
+	bool movingY;
+
 	sf::Clock animationTimer;
 
 	bool animationSwitch;
